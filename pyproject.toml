@@ -1,0 +1,19 @@
+[project]
+name = "harness-python-code-rules"
+version = "0.1.0"
+description = "Data-science project template with opinionated structural code-quality rules"
+requires-python = ">=3.10"
+
+# --- Ruff: the rules expressible natively (see README for the full rule table) ---
+# Rule 1 (complexity), Rule 4 (max-statements), Rule 7 (no-else-return family).
+# Formatting and import-sorting are intentionally NOT configured here; they are
+# handled by other tooling.
+
+[tool.ruff.lint]
+select = ["C901", "PLR0915", "RET505", "RET506", "RET507", "RET508"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.pylint]
+max-statements = 15
