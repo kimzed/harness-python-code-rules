@@ -1,14 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "harness-python-code-rules"
 version = "0.1.0"
-description = "Data-science project template with opinionated structural code-quality rules"
+description = "Opinionated structural code-quality checks for Python data-science projects"
+readme = "README.md"
 requires-python = ">=3.10"
+dependencies = ["tomli>=2.0.1; python_version < '3.11'"]
 
-# --- Ruff: the rules expressible natively (see README for the full rule table) ---
-# Rule 1 (complexity), Rule 4 (max-statements), Rule 7 (no-else-return family).
-# Formatting and import-sorting are intentionally NOT configured here; they are
-# handled by other tooling.
+[project.scripts]
+harness-code-rules = "harness_python_code_rules.check_structure:main"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/harness_python_code_rules"]
+
+# ---------------------------------------------------------------------------
+# Configuration of the custom checker. These are also the DEFAULTS baked into
+# the tool; override per-project by copying this table into your own
+# pyproject.toml. Set any value to `false` to disable that check.
+# ---------------------------------------------------------------------------
+[tool.harness-code-rules]
+max-lines = 50
+max-depth = 3
+max-bool-operands = 3
+
+# ---------------------------------------------------------------------------
+# Reference Ruff config (rules 1, 4, 7). Copy this into consuming projects, or
+# `extend` it. Formatting/import-sorting are intentionally NOT configured here.
+# ---------------------------------------------------------------------------
 [tool.ruff.lint]
 select = ["C901", "PLR0915", "RET505", "RET506", "RET507", "RET508"]
 

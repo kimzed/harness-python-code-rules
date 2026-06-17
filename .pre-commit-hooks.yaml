@@ -1,0 +1,7 @@
+- id: harness-code-rules
+  name: harness structural code rules
+  description: Enforce function length, nesting depth, and boolean-expression rules.
+  entry: harness-code-rules
+  language: python
+  types: [python]
+  require_serial: true
